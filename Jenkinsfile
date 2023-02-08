@@ -21,7 +21,7 @@ pipeline {
    stage('starting app'){
        steps{
           sshagent([cred]){
-             ssh """ssh -o  StrictHostKeyChecking=no $ {server} << EOF
+             ssh """ssh -o  StrictHostKeyChecking=no ${server} << EOF
              cd ${dir}
              docker-compose up -d
              exit
