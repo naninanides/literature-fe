@@ -3,20 +3,20 @@ def server = '<bhq@34.143.162.86>'
 def dir = '~/literature-fe'
 def branch = 'main'
 
-pipeline {
-   agent any
-   stages{
-     stage('docker build'){
-       steps{
-          sshagent([cred]){
-             sh """ssh -o  StrictHostKeyChecking=no ${server} << EOF
-             cd ${dir}
-             docker build -t frontend
-             git pull origin ${branch}
-             exit
-             EOF"""
-             }
-          }
-       }
-    }
-}   
+pipline{
+	agent any
+	stages{
+	   stage ('docker-compose'){
+	       steps{
+	           sshagent([cred])
+	              sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+	              docker-compose up
+	              cd ${dir}
+	              git pull origin ${branch}
+	              exit
+	              EOF"""
+	       }
+	   }
+	}
+}
+
