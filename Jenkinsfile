@@ -3,22 +3,16 @@ def server = '<bhq@34.143.162.86>'
 def dir = '~/literature-fe'
 def branch = 'main'
 
-pipeline {
+pipeline{
    agent any
    stages{
-     stage('docker-compose and pulling repo'){
-       steps{
-          sshagent([cred]){
-             sh "ssh -o StrictHostKeyChecking=no ${server} 'cd ${dir} && docker-compose down && git pull origin ${branch}'"
-             }
+      stage('login server'){
+         steps{
+            sshagent(credentials:['appserver']){
+               sh 'ssh  -o StrictHostKeyChecking=no  bhq@35.247.167.181 uptime "whoami"'
+          }
+        echo "success lgoin"
          }
-      }
-   stage('starting app'){
-       steps{
-          sshagent([cred]){
-             sh "ssh -o StrictHostKeyChecking=no ${server} 'cd ${dir} && docker-compose up -d && git push origin ${branch}'"
-             }
-         }
-      }
+       }
    }
 }
