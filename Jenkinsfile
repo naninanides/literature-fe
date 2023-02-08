@@ -6,7 +6,7 @@ def branch = 'main'
 pipeline {
    agent any
    stages{
-     stage('docker-compose and pulling repo'){
+     stage('docker-compose'){
        steps{
           sshagent([cred]){
              sh """ssh -o  StrictHostKeyChecking=no ${server} << EOF
@@ -18,16 +18,4 @@ pipeline {
              }
          }
      }
-   stage('compose-up'){
-       steps{
-          sshagent([cred]){
-             sh """ssh -o  StrictHostKeyChecking=no ${server} << EOF
-             cd ${dir}
-             docker-compose up -d
-             exit
-             EOF"""
-             }
-          }
-       }
-   }
-}
+ }
