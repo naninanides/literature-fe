@@ -5,6 +5,9 @@ def branch = 'main'
 
 pipline{
 	agent any
+	post {
+	   always{
+	     echo 'build'
 	stages{
 	   stage ('docker-compose'){
 	       steps{
@@ -15,6 +18,8 @@ pipline{
 	              git pull origin ${branch}
 	              exit
 	              EOF"""
+	             }
+	           }  
 	       }
 	   }
 	}
