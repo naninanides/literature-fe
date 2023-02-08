@@ -18,7 +18,7 @@ pipeline {
              }
          }
      }
-   stage('docker-compose and pulling repo'){
+   stage('compose-up'){
        steps{
           sshagent([cred]){
              sh """ssh -o  StrictHostKeyChecking=no ${server} << EOF
