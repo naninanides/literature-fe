@@ -9,26 +9,16 @@ pipeline {
      stage('docker-compose and pulling repo'){
        steps{
           sshagent([cred]){
-             ssh """ssh -o StrictHostKeyChecking=no ${server} << EOF
-             cd ${dir}
-             docker-compose down
-             git pull origin ${branch}
-             exit
-             EOF"""
+             sh "ssh -o StrictHostKeyChecking=no ${server} 'cd ${dir} && docker-compose down && git pull origin ${branch}'"
              }
          }
       }
    stage('starting app'){
        steps{
           sshagent([cred]){
-             ssh """ssh -o StrictHostKeyChecking=no ${server} << EOF
-             cd ${dir}
-             docker-compose up -d
-             git push origin ${branch}
-             exit
-             EOF"""
+             sh "ssh -o StrictHostKeyChecking=no ${server} 'cd ${dir} && docker-compose up -d && git push origin ${branch}'"
              }
          }
       }
    }
-}  
+}
