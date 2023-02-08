@@ -1,5 +1,5 @@
 def cred = 'appserver'
-def server = '<bhq@34.143.162.86>'
+def server = '<ssh -i C:\Users\baihaqi\.ssh\SSHkey bhq@34.143.162.86>'
 def dir = '~/literature-fe'
 def branch = 'main'
 
