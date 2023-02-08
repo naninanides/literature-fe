@@ -9,7 +9,7 @@ pipeline{
       stage('login server'){
          steps{
             sshagent(credentials:['appserver']){
-               sh 'ssh -o StrictHostKeyChecking=no -i /var/jenkins_home/literature-fe/SSHkey.pub bhq@35.247.167.181 uptime "whoami"'
+               sh 'ssh -o StrictHostKeyChecking=no -i /var/jenkins_home/literature-fe/SSHkey bhq@35.247.167.181 uptime "whoami"'
           }
         echo "success lgoin"
          }
