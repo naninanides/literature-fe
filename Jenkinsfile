@@ -1,3 +1,4 @@
+def cred = 'appserver'
 def server = '<bhq@34.143.162.86>'
 def dir = '~/literature-fe'
 def branch = 'main'
